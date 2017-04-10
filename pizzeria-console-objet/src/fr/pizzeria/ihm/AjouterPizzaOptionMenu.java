@@ -1,0 +1,42 @@
+package fr.pizzeria.ihm;
+
+import fr.pizzeria.dao.Stockage;
+import fr.pizzeria.dao.StockageTableau;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.model.Pizza;
+import java.util.Scanner;
+
+public class AjouterPizzaOptionMenu extends OptionMenu {
+
+	public AjouterPizzaOptionMenu(Stockage stockage) {
+		super(stockage);
+		this.titre = "Ajouter une nouvelle pizza";
+	}
+
+	public AjouterPizzaOptionMenu(Stockage stockage, Scanner question) {
+		super(stockage, question);
+		this.titre = "Ajouter une nouvelle pizza";
+	}
+
+	@Override
+	public void execute() {
+
+		System.out.println("Veuillez saisir un code:");
+		String code = question.next();
+		System.out.println("Veuillez saisir un libellé:");
+		String libelle = question.next();
+		System.out.println("Veuillez saisir un prix:");
+		double prix = question.nextDouble();
+
+		Pizza p = new Pizza(code, libelle, prix);
+
+		try {
+			stockage.saveNewPizza(p);
+		} catch (StockageException e) {
+			// e.printStackTrace();
+			System.out.println("Erreure/Exception à l'ajout d'une pizza ! (tableau plein)");
+		}
+	}
+
+}
