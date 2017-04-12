@@ -2,14 +2,15 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 import fr.pizzeria.dao.Stockage;
-import fr.pizzeria.dao.StockageTableau;
+import fr.pizzeria.dao.StockageList;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
 
-	public ModifierPizzaOptionMenu(StockageTableau stockageTableau) {
+	public ModifierPizzaOptionMenu(StockageList stockageTableau) {
 		super(stockageTableau);
 		this.titre = "Mettre à jour une pizza";
 	}
@@ -36,11 +37,17 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			String code = question.next();
 			System.out.println("Veuillez saisir un libell�:");
 			String libelle = question.next();
+			System.out.println("En majuscule veuillez saisir une categorie de pizza parmi : VIANDE , POISSON , SANS_VIANDE : ");
+			String cat = question.next();
+			CategoriePizza categorie = CategoriePizza.valueOf(cat);
 			System.out.println("Veuillez saisir un prix:");
-			question.nextLine();
 			double prix = question.nextDouble();
+			System.out.println("Veuillez saisir un prix:");
 
-			Pizza p = new Pizza(code, libelle, prix);
+			if (categorie == null)
+				categorie = CategoriePizza.VIANDE;		
+
+			Pizza p = new Pizza(code, libelle, prix, categorie);
 
 			try {
 				stockage.updatePizza(codeAModifier, p);

@@ -3,7 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.Stockage;
-import fr.pizzeria.dao.StockageTableau;
+import fr.pizzeria.dao.StockageList;
 import fr.pizzeria.model.Pizza;
 
 public abstract class OptionMenu {
@@ -40,7 +40,7 @@ public abstract class OptionMenu {
 		return stockage;
 	}
 
-	public void setTabPizza(StockageTableau stockageTableau) {
+	public void setTabPizza(StockageList stockageTableau) {
 		this.stockage = stockageTableau;
 	}
 

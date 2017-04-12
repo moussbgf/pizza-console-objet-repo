@@ -1,11 +1,13 @@
 package fr.pizzeria.ihm;
 
 import fr.pizzeria.dao.Stockage;
-import fr.pizzeria.dao.StockageTableau;
+import fr.pizzeria.dao.StockageList;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 import java.util.Scanner;
+import java.util.concurrent.CancellationException;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
 
@@ -21,16 +23,22 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() {
-
+		
 		System.out.println("Veuillez saisir un code:");
 		String code = question.next();
 		System.out.println("Veuillez saisir un libellé:");
 		String libelle = question.next();
+		System.out.println("En majuscule veuillez saisir une categorie de pizza parmi : VIANDE , POISSON , SANS_VIANDE : ");
+		String cat = question.next();
+		CategoriePizza categorie = CategoriePizza.valueOf(cat);
 		System.out.println("Veuillez saisir un prix:");
 		double prix = question.nextDouble();
+		
+		if (categorie == null)
+			categorie = CategoriePizza.VIANDE;		
 
-		Pizza p = new Pizza(code, libelle, prix);
-
+		Pizza p = new Pizza(code, libelle, prix, categorie);
+		
 		try {
 			stockage.saveNewPizza(p);
 		} catch (StockageException e) {

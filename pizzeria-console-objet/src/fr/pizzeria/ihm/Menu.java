@@ -1,8 +1,11 @@
 package fr.pizzeria.ihm;
 
+
+import java.util.Map;
+
 public class Menu {
 	
-	private OptionMenu[] actions;
+	private Map<Integer,OptionMenu> actions;
 
 	public void afficher() {
 		
@@ -15,11 +18,11 @@ public class Menu {
 	}
 	
 	
-	public OptionMenu[] getActions() {
+	public Map<Integer,OptionMenu> getActions() {
 		return actions;
 	}
 
-	public void setActions(OptionMenu[] actions) {
+	public void setActions(Map<Integer,OptionMenu> actions) {
 		this.actions = actions;
 	}
 }

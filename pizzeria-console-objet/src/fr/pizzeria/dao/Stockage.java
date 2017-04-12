@@ -1,14 +1,16 @@
 package fr.pizzeria.dao;
 
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
+
+import java.util.List;
+
 import fr.pizzeria.exception.StockageException;
-import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public interface Stockage {
 	
-	Pizza[] findAllPizzas();
+	//Pizza[] findAllPizzas();
+	
+	List<Pizza> findAllPizzas();
 
 	void saveNewPizza(Pizza pizza) throws StockageException ;
 
